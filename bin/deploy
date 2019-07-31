@@ -1,0 +1,13 @@
+#!/bin/bash
+
+PROJECT_ID=$(gcloud config get-value project)
+SERVICE_ACCOUNT="echo-service@${PROJECT_ID}.iam.gserviceaccount.com"
+
+gcloud beta run deploy echo \
+  --allow-unauthenticated \
+  --concurrency 50 \
+  --image gcr.io/${PROJECT_ID}/echo:openapi \
+  --memory "2G" \
+  --region us-central1 \
+  --service-account ${SERVICE_ACCOUNT} \
+  --platform managed

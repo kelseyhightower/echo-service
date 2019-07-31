@@ -1,0 +1,37 @@
+openapi: 3.0.2
+servers:
+  - url: 'https://echo.hightowerlabs.com'
+info:
+  description: The echo API return the message given.
+  version: 1.0.0
+  title: Echo API
+  contact:
+    name: Hightower Labs
+    url: 'https://developer.hightowerlabs.com'
+    email: developer@hightowerlabs.com
+paths:
+  /echo:
+    post:
+      summary: Echo message body
+      operationId: echo
+      requestBody:
+        description: message to echo
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Message' 
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+components:
+  schemas:
+    Message:
+      type: object
+      properties:
+        message:
+          type: string
